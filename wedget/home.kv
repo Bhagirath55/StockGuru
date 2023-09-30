@@ -1,0 +1,23 @@
+<ThirdPage>:
+    Screen:
+        FloatLayout:
+
+            MDTextField:
+                id:ticker
+                hint_text: "Enter Stock Ticker"
+                helper_text_mode: "on_error"
+                helper_text: "Invalid Ticker Symbol"
+                required: True
+
+        MDRaisedButton:
+            text:"Lets Predict"
+            on_release:app.predict_stock(ticker.text)
+
+        MDLabel:
+            id:result
+            text:""
+            font_size:"10sp"
+            halign:"center"
+            color: "#FFFFFF"
+            #pos_hint:{'center_x':.5,'center_y':.3} showing error orientation: "vertical"
+
