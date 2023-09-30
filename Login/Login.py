@@ -174,6 +174,6 @@ if __name__ == "__main__":
     Builder.load_file("../wedget/login.kv")
     Builder.load_file("../wedget/signup.kv")
     Builder.load_file("../wedget/home.kv")
-
+#ok
     #Builder.load_file("signup.kv")
     StockGuru().run()
