@@ -171,10 +171,9 @@ class StockGuru(MDApp):
 if __name__ == "__main__":
     # Set the initial window size and run the app
     Window.size = (360, 640)
-    chu
     Builder.load_file("../wedget/login.kv")
     Builder.load_file("../wedget/signup.kv")
     Builder.load_file("../wedget/home.kv")
-
+#ok
     #Builder.load_file("signup.kv")
     StockGuru().run()
