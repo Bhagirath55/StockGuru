@@ -3,7 +3,7 @@ import yfinance as yf
 from datetime import date,  timedelta
 import statsmodels.api as sm
 import pmdarima as pm
-from database import Database
+import database
 
 import re
 
@@ -123,9 +123,9 @@ class StockGuru(MDApp):
     # Function to check if a user with the provided username and password exists
     def check_user_sign_in(self, username, password):
         try:
-            Database.cursor.execute(f"SELECT * FROM sign_up_credentials WHERE username='{username.text}'"
+            database.cursor.execute(f"SELECT * FROM sign_up_credentials WHERE username='{username.text}'"
                                 f" AND password='{password.text}'")
-            existing_user = Database.cursor.fetchone()
+            existing_user = database.cursor.fetchone()
             return existing_user is not None
         except mysql.connector.Error as err:
             print(f"Error: {err}")
@@ -146,19 +146,19 @@ class StockGuru(MDApp):
     # Function to handle sign-up
     def sign_up(self, username, email, password, password2):
         try:
-            Database.cursor.execute(f"SELECT * FROM sign_up_credentials WHERE username='{username.text}'")
-            existing_user = Database.cursor.fetchone()
+            database.cursor.execute(f"SELECT * FROM sign_up_credentials WHERE username='{username.text}'")
+            existing_user = database.cursor.fetchone()
             if existing_user:
                 # Username already exists, display an error message
                 self.show_message("Username Already Exists. Please Choose a Different Username")
             else:
                 # Insert the new user into the database
                 if password.text == password2.text:
-                    Database.cursor.execute(f"INSERT INTO login_users (username,password)"
+                    database.cursor.execute(f"INSERT INTO login_users (username,password)"
                                         f"VALUES('{username.text}','{password.text}')")
-                    Database.cursor.execute(f"INSERT INTO sign_up_credentials(username, email, password)"
+                    database.cursor.execute(f"INSERT INTO sign_up_credentials(username, email, password)"
                                         f" VALUES ('{username.text}', '{email.text}', '{password.text}')")
-                    Database.mydb.commit()
+                    database.mydb.commit()
                     self.show_message("Username Added successfully!")
                 else:
                     self.show_message("Password Doesn't Matched Please Re-enter")
