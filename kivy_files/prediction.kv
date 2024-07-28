@@ -1,0 +1,75 @@
+<PredictionPage>:
+    Screen:
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: '40dp'
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint:0.5,0.5
+                height:self.minimum_height
+                spcaing:"20dp"
+                pos_hint: {'center_x': 0.5,'center_y': 0.5}
+
+                MDTextField:
+                    id: stock_ticker
+                    hint_text: "Enter Stock Ticker"
+                    icon_right: 'account'
+                    font_size: "15dp"
+
+                MDTextField:
+                    id: no_of_days
+                    hint_text: "Enter No of Days To Predict"
+                    icon_right: 'numeric'
+                    font_size: "15dp"
+                    input_filter: "int"
+
+                MDRaisedButton:
+                    text: "Predict"
+                    on_release: app.root.current_screen.predict_stock()
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            RelativeLayout:
+                size_hint: 1,1
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+                MDCard:
+                    orientation: 'vertical'
+                    id: graph_layout
+                    size_hint:0.5,1
+                    size: "500dp", "500dp"
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    adaptive_height: True
+
+                    Label:
+                        id: message_label
+                        text: ""
+                        size_hint: None, None
+                        size: 200, 50
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+                    Image:
+                        source: ''
+                        id: prediction_image
+                        size_hint: None,None
+                        size: self.parent.size if self.parent else (1,1)
+                        allow_stretch: True
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            MDRaisedButton:
+                text: "View Predicted Prices"
+                on_release: root.show_predicted_prices()
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        BoxLayout:
+            size_hint:.75,None
+            height:"30dp"
+            pos_hint:{'center_x':.4,'center_y':.9}
+            spacing:"10dp"
+
+            MDRaisedButton:
+                text:"<"
+                font_size:"30dp"
+                size_hint:None,1
+                on_release:app.root.current='home_page'

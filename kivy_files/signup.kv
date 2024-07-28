@@ -1,0 +1,142 @@
+<SignUpPage>:
+    Screen:
+        FloatLayout:
+            Image:
+                source:'login.jfif'
+                size_hint:[1,1]
+                allow_stretch:True
+                keep_ratio:False
+
+        MDLabel:
+            text:"Sign-Up Page"
+            font_size:"30dp"
+            halign:"center"
+            color:"#FFFFFF"
+            pos_hint:{'center_y':.9}
+
+        MDTextField:
+            hint_text:"Enter Username"
+            id:user2
+            required:True
+            icon_right:'account'
+            font_size:"16dp"
+            size_hint_x:.85
+            pos_hint:{'center_x':.5,'center_y':.78}
+            on_text:self.text=self.text.replace("","")
+            write_tab:False
+            color:1,1,1,1
+
+
+        MDTextField:
+            hint_text:"Enter Your Email"
+            id:email
+            required:True
+            icon_right:'email'
+            font_size:"16dp"
+            size_hint_x:.85
+            pos_hint:{'center_x':.5,'center_y':.65}
+            on_text:self.text=self.text.replace("","")
+            write_tab:False
+            on_focus:root.validate_email(email.text)
+            color:1,1,1,1
+
+
+        MDLabel:
+            id:email_error_label
+            text:""
+            theme_text_color:"Error"
+            size_hint:(1,1)
+            size:(self.texture_size)
+            pos_hint:{'center_x':.5,'center_y':.6}
+
+
+        MDTextField:
+            id:psswd1
+            hint_text:" New Password"
+            required:True
+            password:True
+            icon_right:"eye-off"
+            font_size:"16dp"
+            size_hint_x:.85
+            pos_hint:{'center_x':.5,'center_y':.5}
+            on_text:self.text=self.text.replace("","")
+            write_tab:False
+            color:1,1,1,1
+
+
+
+        MDTextField:
+            id:psswd2
+            hint_text:" Confirm Password"
+            required:True
+            password:True
+            icon_right:"eye-off"
+            font_size:"16dp"
+            size_hint_x:.85
+            pos_hint:{'center_x':.5,'center_y':.4}
+            on_text:self.text=self.text.replace("","")
+            write_tab:False
+            theme_text_color:1,1,1,1
+
+
+        BoxLayout:
+            size_hint:.85,None
+            height:"360dp"
+            pos_hint:{'center_x':.5,'center_y':.4}
+            spacing:"15dp"
+
+
+            MDCheckbox:
+                id:cb
+                size_hint:None,None
+                width:"30dp"
+                height:"30dp"
+                pos_hint:{'center_x':.5,'center_y':.3}
+                disabled:root.disabled
+                on_press:
+                    psswd1.password=False if psswd1.password==True else True
+                    psswd1.icon_right= "eye" if psswd1.icon_right == "eye-off" else "eye-off"
+                    psswd2.password=False if psswd2.password==True else True
+                    psswd2.icon_right= "eye" if psswd2.icon_right == "eye-off" else "eye-off"
+
+            MDLabel:
+                text:"[ref=Show Password]Show Password[/ref]"
+                markup:True
+                pos_hint:{'center_x':.5,'center_y':.3}
+                on_ref_press:
+                    cb.active=False if cb.active==True else True
+                    psswd1.password=False if psswd1.password==True else True
+                    psswd1.icon_right= "eye" if psswd1.icon_right == "eye-off" else "eye-off"
+                    psswd2.password=False if psswd2.password==True else True
+                    psswd2.icon_right= "eye" if psswd2.icon_right == "eye-off" else "eye-off"
+
+
+        BoxLayout:
+            size_hint:.85,None
+            height:"30dp"
+            pos_hint:{'center_x':.4,'center_y':.9}
+            spacing:"10dp"
+
+
+
+            MDFlatButton:
+                text:"Back"
+                font_size:"10dp"
+                size_hint:None,None
+                md_bg_color:"#000000"
+                on_release:app.root.current='login_page'
+
+
+        BoxLayout:
+            size_hint:.85,None
+            height:"360dp"
+            pos_hint:{'center_x':.5,'center_y':.4}
+            spacing:"15dp"
+
+
+            MDRaisedButton:
+                text:"Sign-Up"
+                #font_size:"22dp"
+                #size_hint_x:1
+                #md_bg_color:"#000000"
+                on_release:root.register_user(*[user2.text,email.text,psswd1.text])

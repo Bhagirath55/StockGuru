@@ -1,0 +1,16 @@
+<StockNews>:
+    Screen:
+        FloatLayout:
+            Image:
+                source:'login.jfif'
+                size_hint:(1,1)
+                allow_stretch:True
+                keep_ratio:False
+
+
+                MDFlatButton:
+                    text:"Back"
+                    font_size:"10dp"
+                    size_hint:None,None
+                    md_bg_color:"#000000"
+                    on_release:app.root.current='home_page'

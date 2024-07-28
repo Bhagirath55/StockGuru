@@ -1,0 +1,107 @@
+<HomePage>:
+    Screen:
+        md_bg_color:56/255,40/255,81/255,1
+
+        MDBottomNavigation:
+            MDBottomNavigationItem:
+                text: 'Home'
+                icon: 'home'
+
+            MDBottomNavigationItem:
+                text: 'Lets-Predict'
+                icon: 'chart-line'
+                on_tab_press: app.root.current = 'prediction_page'
+
+            MDBottomNavigationItem:
+                text: 'STOCK-NEWS'
+                icon: 'account'
+                on_tab_press: app.root.current = 'stock_news'
+
+        MDBoxLayout:
+            orientation:'vertical'
+
+            MDBoxLayout:
+                size_hint_y:.10
+                padding:dp(25)
+
+                MDBoxLayout:
+                    orientation:"vertical"
+
+                    MDBoxLayout:
+                        adaptive_size:True
+                        spacing:dp(38)
+
+                        #MDIconButton:
+                            #icon: 'magnify'
+                            #theme_text_color: "Custom"
+                            #text_color: 1, 1, 0, 1
+                            #on_release: app.root.current_screen.on_search()
+
+                        MDLabel:
+                            text: "Stock-Guru"
+                            text_size: None, None
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 0, 1
+                            adaptive_width: True
+
+                        MDIconButton:
+                            id: custom_dropdown_button
+                            icon:'chevron-down'
+                            theme_text_color:"Custom"
+                            text_color: 1,1,0,1
+                            on_release: app.root.current_screen.on_start()
+
+                        MDIconButton:
+                            icon:"bell"
+                            theme_text_color:"Custom"
+                            text_color: 1,1,0,1
+
+            MDGridLayout:
+                size_hint_y:.75
+                cols:2
+                padding:[dp(35),dp(35),dp(35),dp(100)]
+                spacing:dp(10)
+
+                ElementCard:
+                    id: nifty50
+
+                ElementCard:
+                    id: banknifty
+
+                ElementCard:
+                    id: sensex
+
+                ElementCard:
+                    id: reliance
+
+                ElementCard:
+                    id: itc
+
+                ElementCard:
+                    id: infosys
+
+<ElementCard@MDCard>:
+    md_bg_color: 0, 0, 0, 1
+    padding: dp(5)
+    size_hint: 0.15, 0.15  # Adjust the size_hint as needed
+    spacing: dp(0)
+    radius: dp(15)
+    ripple_behavior: True
+    image: ''
+    text: ""
+    price_label: ''
+    gain_loss_label: ''
+    items_count: root.text
+    subtext: ""
+    orientation: "vertical"
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDLabel:
+            halign: "center"
+            valign: "middle"
+            text: root.price_label
+            font_style: "Button"
+            font_size: "20sp"
+

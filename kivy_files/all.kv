@@ -1,0 +1,443 @@
+<SignUpPage>:
+    Screen:
+        FloatLayout:
+            Image:
+                source:'login.jfif'
+                size_hint:[1,1]
+                allow_stretch:True
+                keep_ratio:False
+
+        MDLabel:
+            text:"Sign-Up Page"
+            font_size:"30dp"
+            halign:"center"
+            color:"#FFFFFF"
+            pos_hint:{'center_y':.9}
+
+        MDTextField:
+            hint_text:"Enter Username"
+            id:user2
+            required:True
+            icon_right:'account'
+            font_size:"16dp"
+            size_hint_x:.85
+            pos_hint:{'center_x':.5,'center_y':.78}
+            on_text:self.text=self.text.replace("","")
+            write_tab:False
+            #color:1,1,1,1
+
+
+        MDTextField:
+            hint_text:"Enter Your Email"
+            id:email
+            required:True
+            icon_right:'email'
+            font_size:"16dp"
+            size_hint_x:.85
+            pos_hint:{'center_x':.5,'center_y':.65}
+            on_text:self.text=self.text.replace("","")
+            write_tab:False
+            on_focus:root.validate_email(email.text)
+            #color:1,1,1,1
+
+
+        MDLabel:
+            id:email_error_label
+            text:""
+            theme_text_color:"Error"
+            size_hint:(1,1)
+            size:(self.texture_size)
+            pos_hint:{'center_x':.5,'center_y':.6}
+
+
+        MDTextField:
+            id:psswd1
+            hint_text:" New Password"
+            required:True
+            password:True
+            icon_right:"eye-off"
+            font_size:"16dp"
+            size_hint_x:.85
+            pos_hint:{'center_x':.5,'center_y':.5}
+            on_text:self.text=self.text.replace("","")
+            write_tab:False
+            #color:1,1,1,1
+
+
+
+        MDTextField:
+            id:psswd2
+            hint_text:" Confirm Password"
+            required:True
+            password:True
+            icon_right:"eye-off"
+            font_size:"16dp"
+            size_hint_x:.85
+            pos_hint:{'center_x':.5,'center_y':.4}
+            on_text:self.text=self.text.replace("","")
+            write_tab:False
+            #theme_text_color:1,1,1,1
+
+
+        BoxLayout:
+            size_hint:.85,None
+            height:"360dp"
+            pos_hint:{'center_x':.5,'center_y':.4}
+            spacing:"15dp"
+
+
+            MDCheckbox:
+                id:cb
+                size_hint:None,None
+                width:"30dp"
+                height:"30dp"
+                pos_hint:{'center_x':.5,'center_y':.3}
+                disabled:root.disabled
+                on_press:
+                    psswd1.password=False if psswd1.password==True else True
+                    psswd1.icon_right= "eye" if psswd1.icon_right == "eye-off" else "eye-off"
+                    psswd2.password=False if psswd2.password==True else True
+                    psswd2.icon_right= "eye" if psswd2.icon_right == "eye-off" else "eye-off"
+
+            MDLabel:
+                text:"[ref=Show Password]Show Password[/ref]"
+                markup:True
+                pos_hint:{'center_x':.5,'center_y':.3}
+                on_ref_press:
+                    cb.active=False if cb.active==True else True
+                    psswd1.password=False if psswd1.password==True else True
+                    psswd1.icon_right= "eye" if psswd1.icon_right == "eye-off" else "eye-off"
+                    psswd2.password=False if psswd2.password==True else True
+                    psswd2.icon_right= "eye" if psswd2.icon_right == "eye-off" else "eye-off"
+
+
+        BoxLayout:
+            size_hint:.85,None
+            height:"30dp"
+            pos_hint:{'center_x':.4,'center_y':.9}
+            spacing:"10dp"
+
+
+
+            MDFlatButton:
+                text:"Back"
+                font_size:"10dp"
+                size_hint:None,None
+                md_bg_color:"#000000"
+                on_release:app.root.current='login_page'
+
+
+        BoxLayout:
+            size_hint:.85,None
+            height:"360dp"
+            pos_hint:{'center_x':.5,'center_y':.4}
+            spacing:"15dp"
+
+
+            MDRaisedButton:
+                text:"Sign-Up"
+                #font_size:"22dp"
+                #size_hint_x:1
+                #md_bg_color:"#000000"
+                on_release:root.register_user(*[user2.text,email.text,psswd1.text])
+
+
+
+
+<LoginPage>:
+    Screen:
+        FloatLayout:
+            Image:
+                source:'login.jfif'
+                size_hint:(1,1)
+                allow_stretch:True
+                keep_ratio:False
+
+
+        MDLabel:
+            text:"StockGuru "
+            font_size:"60dp"
+            halign:"center"
+            color:"#FFFFFF"
+            pos_hint:{'center_y':.9}
+
+
+
+        MDLabel:
+            text:"Welcomes You "
+            font_size:"40dp"
+            halign:"center"
+            color:"#FFFFFF"
+            pos_hint:{'center_y':.8}
+
+
+
+        MDLabel:
+            text:"Please Sign-In Or Sign-Up"
+            font_size:"20dp"
+            halign:"center"
+            color:"#FFFFFF"
+            pos_hint:{'center_y':.7}
+
+
+
+        MDTextField:
+            hint_size:"Username"
+            id:user
+            icon_right:'account'
+            font_size:"16dp"
+            size_hint_x:.85
+            pos_hint:{'center_x':.5,'center_y':.65}
+            on_text:self.text=self.text.replace("","")
+            write_tab:False
+
+
+
+        MDTextField:
+            id:psswd
+            hint_size:"Password"
+            password:True
+            icon_right:"eye-off"
+            font_size:"16dp"
+            size_hint_x:.85
+            pos_hint:{'center_x':.5,'center_y':.5}
+            on_text:self.text=self.text.replace("","")
+            write_tab:False
+
+
+
+        BoxLayout:
+            size_hint:.85,None
+            height:"40dp"
+            pos_hint:{'center_x':.5,'center_y':.4}
+            spacing:"15dp"
+
+
+            MDCheckbox:
+                id:cb
+                size_hint:None,None
+                width:"30dp"
+                height:"30dp"
+                pos_hint:{'center_x':.5,'center_y':.5}
+                on_press:
+                    psswd.password=False if psswd.password==True else True
+                    psswd.icon_right= "eye" if psswd.icon_right == "eye-off" else "eye-off"
+
+
+
+            MDLabel:
+                text:"[ref=Show Password]Show Password[/ref]"
+                markup:True
+                pos_hint:{'center_x':.5,'center_y':.5}
+                on_ref_press:
+                    cb.active=False if cb.active==True else True
+                    psswd.password=False if psswd.password==True else True
+                    psswd.icon_right= "eye" if psswd.icon_right == "eye-off" else "eye-off"
+
+
+
+        BoxLayout:
+            size_hint:.85,None
+            height:"360dp"
+            pos_hint:{'center_x':.5,'center_y':.4}
+            spacing:"15dp"
+
+
+
+            MDRaisedButton:
+                text:"Login"
+                on_release:root.login(*[user.text,psswd.text])
+
+            MDFlatButton:
+                text:"Create an account"
+                font_size:"22dp"
+                size_hint_x:1
+                md_bg_color:"#000000"
+                on_release:app.root.current='signup_page'
+
+
+
+<HomePage>:
+    Screen:
+        md_bg_color:56/255,40/255,81/255,1
+
+        MDBottomNavigation:
+            MDBottomNavigationItem:
+                text: 'Home'
+                icon: 'home'
+
+            MDBottomNavigationItem:
+                text: 'Lets-Predict'
+                icon: 'chart-line'
+                on_tab_press: app.root.current = 'prediction_page'
+
+            MDBottomNavigationItem:
+                text: 'STOCK-NEWS'
+                icon: 'account'
+                #on_tab_press: app.root.current_screen.on_tab_switch(self.name)
+
+        MDBoxLayout:
+            orientation:'vertical'
+
+            MDBoxLayout:
+                size_hint_y:.10
+                padding:dp(25)
+
+                MDBoxLayout:
+                    orientation:"vertical"
+
+                    MDBoxLayout:
+                        adaptive_size:True
+                        spacing:dp(38)
+
+                        MDIconButton:
+                            icon: 'magnify'
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 0, 1
+                            on_release: app.root.current_screen.on_search()
+
+                        MDLabel:
+                            text: "Stock-Guru"
+                            text_size: None, None
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 0, 1
+                            adaptive_width: True
+
+                        MDIconButton:
+                            id: custom_dropdown_button
+                            icon:'chevron-down'
+                            theme_text_color:"Custom"
+                            text_color: 1,1,0,1
+                            on_release: app.root.current_screen.on_start()
+
+                        MDIconButton:
+                            icon:"bell"
+                            theme_text_color:"Custom"
+                            text_color: 1,1,0,1
+
+            MDGridLayout:
+                size_hint_y:.75
+                cols:2
+                padding:[dp(35),dp(35),dp(35),dp(100)]
+                spacing:dp(10)
+
+                ElementCard:
+                    id: nifty50
+
+                ElementCard:
+                    id: banknifty
+
+                ElementCard:
+                    id: sensex
+
+                ElementCard:
+                    id: reliance
+
+                ElementCard:
+                    id: itc
+
+                ElementCard:
+                    id: infosys
+
+<ElementCard@MDCard>:
+    md_bg_color: 0, 0, 0, 1
+    padding: dp(5)
+    size_hint: 0.15, 0.15  # Adjust the size_hint as needed
+    spacing: dp(0)
+    radius: dp(15)
+    ripple_behavior: True
+    image: ''
+    text: ""
+    price_label: ''
+    gain_loss_label: ''
+    items_count: root.text
+    subtext: ""
+    orientation: "vertical"
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDLabel:
+            halign: "center"
+            valign: "middle"
+            text: root.price_label
+            font_style: "Button"
+            font_size: "20sp"
+
+
+
+<PredictionPage>:
+    Screen:
+
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: '40dp'
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint:0.5,0.5
+                height:self.minimum_height
+                spcaing:"20dp"
+                pos_hint: {'center_x': 0.5,'center_y': 0.5}
+
+                MDTextField:
+                    id: stock_ticker
+                    hint_text: "Enter Stock Ticker"
+                    icon_right: 'account'
+                    font_size: "15dp"
+
+                MDTextField:
+                    id: no_of_days
+                    hint_text: "Enter No of Days To Predict"
+                    icon_right: 'numeric'
+                    font_size: "15dp"
+                    input_filter: "int"
+
+                MDRaisedButton:
+                    text: "Predict"
+                    on_release: app.root.current_screen.predict_stock()
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            RelativeLayout:
+                size_hint: 1,1
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+                MDCard:
+                    orientation: 'vertical'
+                    id: graph_layout
+                    size_hint:0.5,1
+                    size: "500dp", "500dp"
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    adaptive_height: True
+
+                    Label:
+                        id: message_label
+                        text: ""
+                        size_hint: None, None
+                        size: 200, 50
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+                    Image:
+                        source: ''
+                        id: prediction_image
+                        size_hint: None,None
+                        size: self.parent.size if self.parent else (1,1)
+                        allow_stretch: True
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            MDRaisedButton:
+                text: "View Predicted Prices"
+                on_release: root.show_predicted_prices()
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        BoxLayout:
+            size_hint:.75,None
+            height:"30dp"
+            pos_hint:{'center_x':.4,'center_y':.9}
+            spacing:"10dp"
+
+            MDRaisedButton:
+                text:"<"
+                font_size:"30dp"
+                size_hint:None,1
+                on_release:app.root.current='home_page'
